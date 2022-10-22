@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>15 Grados </title>
+    <title>15 Grados - Carrito</title>
 
     <script src="https://unpkg.com/vue@3"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
@@ -13,14 +13,15 @@
     
     <!---Control de Vue-->
     <div id="myApp">
-        <h1>App 15 Grados: <small>Inicio</small></h1>
+        <h1>App 15 Grados: <small>{{newQuote}}</small></h1>
+        
 
         <ul class="nav nav-pills">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+              <a class="nav-link" aria-current="page" href="index.html">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="carrito.html">Carrito</a>
+              <a class="nav-link active" href="#">Carrito</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="pedido.html">Pedido online</a>
@@ -33,34 +34,30 @@
         <hr>
 
         <div class="container">
-            <h2>Galería</h2>
-            <p>Bienvendo a 15 Grados.</p>
-            <p>Contamos con selección de vinos y licores.</p>
-            <p>Click on the images to enlarge them.</p>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                    <a href="vinos.jpg" target="_blank">
-                        <img src="vinos.jpg" alt="Lights" style="width:100%">
-                        <div class="caption">
-                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                        </div>
-                    </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                    <a href="cervezas.jpg" target="_blank">
-                        <img src="cervezas.jpg" alt="Nature" style="width:100%">
-                        <div class="caption">
-                        <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                        </div>
-                    </a>
-                    </div>
-                </div>
-            </div>
+            <input 
+            type="text" 
+            v-model="newQuote"
+            v-on:keypress.enter="addQuote">
+
+            <input 
+            type="text" 
+            v-model="newPrice"
+            v-on:keypress.enter="addQuote">
         </div>
-          
+
+       <br> 
+        
+        <div class="container">
+            <ul class="list-group">
+                <li v-for="({quote, author}, index) in quotes" class="list-group-item d-flex justify-content-between align-items-center"> 
+                    <span>-{{quote}}</span>
+                    <!-- <blockquote v-if="author">-{{author}} </blockquote> -->
+                    
+                    <blockquote v-show="author">${{author}} </blockquote>
+                </li>
+            </ul>
+        </div>
+        
     </div>
 
     
